@@ -1,0 +1,19 @@
+﻿@{  
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Welcome to my Web Site!";
+}
+@section head
+{
+    <script type="text/javascript">
+    $(function() {
+        "use strict";
+        var listEditorViewModel = function() {
+            // ko.observableArray lets you track changes to a collection of things
+            this.allItems = ko.observableArray(["Apple", "Banana", "Cherry"]);
+        };
+        ko.applyBindings(new listEditorViewModel());
+    });
+</script>
+}
+<div>List items:</div>
+<select multiple="multiple" data-bind="options: allItems"></select>

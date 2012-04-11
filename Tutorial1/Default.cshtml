@@ -5,15 +5,41 @@
 @section head
 {
     <script type="text/javascript">
-    $(function() {
-        "use strict";
-        var listEditorViewModel = function() {
-            // ko.observableArray lets you track changes to a collection of things
-            this.allItems = ko.observableArray(["Apple", "Banana", "Cherry"]);
-        };
-        ko.applyBindings(new listEditorViewModel());
-    });
+        $(function () {
+            "use strict";
+            var listEditorViewModel = function () {
+                // ko.observableArray lets you track changes to a collection of things
+                this.allItems = ko.observableArray(["Apple", "Banana", "Cherry"]);
+
+                // ko.observable tracks a single item. The initial state here is an empty string.
+                this.itemToAdd = ko.observable("");
+
+                this.addItem = function () {
+                    this.allItems.push(this.itemToAdd());
+                    this.itemToAdd(""); // After adding an item, reset itemToAdd to an empty string
+                };
+
+                this.selectedItems = ko.observableArray([]); // Initially select nothing
+
+                this.removeSelected = function() {
+                    this.allItems.removeAll(this.selectedItems());
+                    this.selectedItems([]); // Reset selection to an empty set
+                };
+            };
+            ko.applyBindings(new listEditorViewModel());
+        });
 </script>
 }
 <div>List items:</div>
-<select multiple="multiple" data-bind="options: allItems"></select>
+<select multiple="multiple" data-bind="options: allItems, selectedOptions: selectedItems"></select>
+<form data-bind="submit: addItem">
+    Add item:
+    <input data-bind="value: itemToAdd" />
+    <button type="submit">Add</button>
+</form>
+<button data-bind="click: removeSelected, enable: selectedItems().length > 0">
+    Remove selected items
+</button>
+<button data-bind="click: function() { allItems.sort() }, enable: allItems().length > 1">
+    Sort
+</button>

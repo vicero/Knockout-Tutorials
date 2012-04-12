@@ -1,0 +1,53 @@
+﻿@using System.Web.Script.Serialization
+@{  
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "Welcome to my Web Site!";
+    var initialData = new JavaScriptSerializer().Serialize(new[]
+                                 {
+                                     new GiftModel {Title = "Tall Hat", Price = 49.95},
+                                     new GiftModel {Title = "Long Cloak", Price = 78.25}
+                                 });
+}
+
+@section viewModel
+{
+    var viewModel = {
+        gifts: ko.observableArray(@Html.Raw(initialData)),
+        addGift: function () {
+            this.gifts.push({ Title: "", Price: "" });
+        },
+        removeGift: function (gift) {
+            this.gifts.remove(gift);
+        },
+        save: function() {
+            ko.utils.postJson(location.href, { gifts: this.gifts });
+        }
+    };
+}
+
+@section templates
+{
+    <script type="text/html" id="giftRowTemplate">
+        <tr>
+            <td>Gift name: <input class="required" data-bind="value: Title, uniqueName: true"/></td>
+            <td>Price: \$ <input class="required number" data-bind="value: Price, uniqueName: true"/></td>
+            <td><a href="#" data-bind="click: function() { viewModel.removeGift($data) }">Delete</a></td>
+        </tr>
+    </script>
+}
+
+@section script
+{
+    ko.applyBindings(viewModel, document.body);
+    
+    $("form").validate({ submitHandler: function() { viewModel.save() } });
+}
+<p>You have asked for <span data-bind="text: gifts().length">&nbsp;</span> gift(s)</p>
+
+<form class="giftListEditor">
+<table>
+    <tbody data-bind="template: { name: 'giftRowTemplate', foreach: gifts }"></tbody>
+</table>
+<button data-bind="click: addGift">Add Gift</button>
+<button data-bind="enable: gifts().length > 0" type="submit">Submit</button>
+</form>

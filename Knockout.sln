@@ -27,6 +27,27 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "localhost", "http://localho
 		SlnRelativePath = "Tutorial1\"
 	EndProjectSection
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "localhost", "http://localhost:58700", "{83580C14-6140-41F9-ABFB-7D47CF37C90C}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/Tutorial2"
+		Debug.AspNetCompiler.PhysicalPath = "Tutorial2\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Tutorial2\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/Tutorial2"
+		Release.AspNetCompiler.PhysicalPath = "Tutorial2\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Tutorial2\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "Tutorial2\"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +55,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3796B072-6D18-471E-8688-5CE854980BF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3796B072-6D18-471E-8688-5CE854980BF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83580C14-6140-41F9-ABFB-7D47CF37C90C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83580C14-6140-41F9-ABFB-7D47CF37C90C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
